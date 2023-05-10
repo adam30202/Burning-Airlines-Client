@@ -1,7 +1,7 @@
 const Airplanes = () => {
     return (
         <div>
-            Airplanes cometh
+            Airplanes Create
         </div>
     );
 };

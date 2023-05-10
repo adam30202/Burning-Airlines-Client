@@ -1,11 +1,12 @@
-#root {
+/* #root {
   display: flex;
   align-items: center;
 }
 
 
 .container {
- 
+  border: 5px solid black;
+  margin: 0 auto;
 }
 
 .logo {
@@ -42,4 +43,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
