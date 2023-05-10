@@ -15,9 +15,13 @@ const Airplanes = () => {
         });
     };
 
-    // useEffect(fetchAirplanes, []);
+    useEffect(fetchAirplanes, []);
 
     const saveAirplanes = (airplane, rows, columns) => {
+        console.log('Airplane:', airplane);
+        console.log('Rows:', rows);
+        console.log('Columns:', columns);
+
         axios.post(SERVER_URL, { airplane, rows, columns }).then((response) => {
             setAirplanes([...airplanes, response.data]); //Add new airplane to the state, triggers a re-render
         console.log(response.data);

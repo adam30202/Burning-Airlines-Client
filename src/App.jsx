@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Search/>} />                {/* User Use */}
         <Route path="/flights/#" element={<FlightsShow/>} />  {/* User Use (Leads to FlightsCreate - need to fix) */}
-        <Route exact path="/flights" element={<FlightsCreate/>} />  {/* Admin Use */}
+        <Route exact path="/flightscreate" element={<FlightsCreate/>} />  {/* Admin Use */}
         <Route path="/airplanes" element={<Airplanes/>} />    {/* Admin Use */}
       </Routes>
     </BrowserRouter>
