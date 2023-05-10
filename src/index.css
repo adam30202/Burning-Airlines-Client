@@ -16,11 +16,18 @@
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  border: 1px solid black
+  border: 1px solid black;
+  
 };
 
 .grid-item {
   display: grid;
+  border: 1px solid black;
+}
+
+.table-header {
+  border-bottom: 2px solid black;
+  
 }
 
 /* 

@@ -1,17 +1,26 @@
 import { useState } from "react";
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000/airplanes'
+const SERVER_URL = 'http://localhost:3000/flights'
 
 const Search = () => {
 
     const [ flights, setFlights ] = useState([])
 
     const fetchFlights = (search) => {
-        console.log(search)
         axios(SERVER_URL).then((response) => {
-            setFlights(response.data);
-            console.log(response.data)
+            let allFlights = response.data
+            let flightSearchResults = [];
+          
+            for ( let i = 0; i < allFlights.length; i ++ ) {
+                if (allFlights[i].from === search[1] && allFlights[i].to === search[0]) {
+                    flightSearchResults.push(allFlights[i]);
+                }
+            }
+
+            setFlights(flightSearchResults)
+            console.log(allFlights)
+            console.log(flightSearchResults)
         });
     };
 
@@ -20,7 +29,7 @@ const Search = () => {
         <div className="container">
             Search
              <SearchForm onSubmit={ fetchFlights }/>
-             <SearchResults />
+             <SearchResults searchResults={ flights }/>
         </div>
     );
 };
@@ -56,15 +65,49 @@ const SearchForm = (props) => {
     );
 };
 
-const SearchResults = () => {
+const SearchResults = (props) => {
+
+
     return (
         <div>
             <h3>Flight Search Results</h3>
             <div className="grid-container">
-                <div className="grid-item">Date</div>
-                <div className="grid-item">Flight</div>
-                <div className="grid-item">From > To</div>
-                <div className="grid-item">Plane</div>
+                <div className="grid-item table-header">Date</div>
+                <div className="grid-item table-header">Flight</div>
+                <div className="grid-item table-header">From > To</div>
+                <div className="grid-item table-header">Plane</div>
+
+                { props.searchResults.map( (result) => {
+                    return (
+                    <div key={ result.id } className="grid-item">
+                        { result.date }
+                    </div>
+                    );
+                })}
+
+                { props.searchResults.map( (result) => {
+                    return (
+                    <div key={ result.id } className="grid-item">
+                        { result.id }
+                    </div>
+                    );
+                })}
+
+                { props.searchResults.map( (result) => {
+                    return (
+                    <div key={ result.id } className="grid-item">
+                        { result.from } > { props.searchResults[0].to }
+                    </div>
+                    );
+                })}
+
+                { props.searchResults.map( (result) => {
+                    return (
+                    <div key={ result.id } className="grid-item">
+                        { result.airplane_id }
+                    </div>
+                    );
+                })}
             </div>
         </div>
     )
