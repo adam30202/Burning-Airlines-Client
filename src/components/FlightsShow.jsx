@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 
 const FlightsShow = () => {
-    const [ flightNumber ] = useParams('')
+    const { flightNumber } = useParams({})
+
+    console.log(flightNumber)
 
     return (
         <div>
-            { flightNumber }
+           
         </div>
     );
 };

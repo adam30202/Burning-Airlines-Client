@@ -18,16 +18,16 @@ const Search = () => {
                 };
             };
 
-            setFlights(flightSearchResults)
-            console.log(allFlights)
-            console.log(flightSearchResults)
+            setFlights(flightSearchResults);
+            console.log(allFlights);
+            console.log(flightSearchResults);
         });
     };
-
 
     return (
         <div className="container">
             Search
+            <h1 className="title">Virgin Airlines</h1>
              <SearchForm onSubmit={ fetchFlights }/>
              <SearchResults searchResults={ flights }/>
         </div>
@@ -59,14 +59,13 @@ const SearchForm = (props) => {
             <form className="form" onSubmit= { _handleSubmit } >
                 <input type="text" placeholder="from" onInput={ _handleFromInput }/>
                 <input type="text" placeholder="to" onInput={ _handleToInput }/>
-                <button>Search Flights</button>
+                <button className="button">Search Flights</button>
             </form>
         </div> 
     );
 };
 
 const SearchResults = (props) => {
-
 
     return (
         <div>
@@ -76,48 +75,27 @@ const SearchResults = (props) => {
                 <div className="grid-item table-header">Flight</div>
                 <div className="grid-item table-header">From > To</div>
                 <div className="grid-item table-header">Plane</div>
-
-                
-                
-                
-                
-                
-                
-                
-                
-                
+            </div>
+            <div>
                 { props.searchResults.map( (result) => {
                     return (
-                    <div key={ result.id } className="grid-item">
-                        { result.date }
-                    </div>
-                    );
-                })}
-
-                { props.searchResults.map( (result) => {
-                    return (
-                    <div key={ result.id } className="grid-item">
-                        <a href={"/flights/" + result.id }>{ result.id }</a>
-                    </div>
-                    );
-                })}
-
-                { props.searchResults.map( (result) => {
-                    return (
-                    <div key={ result.id } className="grid-item">
-                        { result.from } > { props.searchResults[0].to }
-                    </div>
-                    );
-                })}
-
-                { props.searchResults.map( (result) => {
-                    return (
-                    <div key={ result.id } className="grid-item">
-                        { result.airplane_id }
+                    <div key={ result.id } className="grid-row">
+                        <div className="grid-item">
+                            { result.date }
+                        </div>
+                        <div  className="grid-item">
+                            <a href={"/flights/" + result.id }>{ result.id }</a>
+                        </div>
+                        <div className="grid-item">
+                            { result.from } > { props.searchResults[0].to }
+                        </div>
+                        <div className="grid-item">
+                            { result.airplane_id }
+                        </div>  
                     </div>
                     );
                 })}
             </div>
         </div>
-    )
+    );
 };
