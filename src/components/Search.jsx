@@ -15,8 +15,8 @@ const Search = () => {
             for ( let i = 0; i < allFlights.length; i ++ ) {
                 if (allFlights[i].from === search[1] && allFlights[i].to === search[0]) {
                     flightSearchResults.push(allFlights[i]);
-                }
-            }
+                };
+            };
 
             setFlights(flightSearchResults)
             console.log(allFlights)
@@ -77,6 +77,15 @@ const SearchResults = (props) => {
                 <div className="grid-item table-header">From > To</div>
                 <div className="grid-item table-header">Plane</div>
 
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 { props.searchResults.map( (result) => {
                     return (
                     <div key={ result.id } className="grid-item">
@@ -88,7 +97,7 @@ const SearchResults = (props) => {
                 { props.searchResults.map( (result) => {
                     return (
                     <div key={ result.id } className="grid-item">
-                        { result.id }
+                        <a href={"/flights/" + result.id }>{ result.id }</a>
                     </div>
                     );
                 })}
