@@ -1,7 +1,9 @@
 const Search = () => {
     return (
-        <div>
-             <p>Search cometh</p>
+        <div className="container">
+            Search
+             {/* <SearchForm />
+             <SearchResults /> */}
         </div>
     );
 };

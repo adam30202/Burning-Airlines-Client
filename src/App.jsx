@@ -11,7 +11,7 @@ import FlightsShow from "./components/FlightsShow";
 
 function App() {
   return (
-    <div>
+    <div className="container">
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Search/>} />                {/* User Use */}
