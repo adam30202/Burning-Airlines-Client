@@ -29,6 +29,25 @@
   color: red;
 }
 
+.nav-tab {
+  left: 341px;
+  position: relative;
+  background-color: red;
+  text-align: center;
+  color: white;
+  /* padding: 1.2em; */
+  width:  142px;
+  height: 40px;
+  border-radius: 0.2em;
+  border: 1px solid black;
+}
+
+.nav-tab p {
+  text-align: center;
+  position: relative;
+  bottom: 5px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

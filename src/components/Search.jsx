@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const SERVER_URL = 'http://localhost:3000/flights'
 
-const Search = () => {
+const Search = (props) => {
 
     const [ flights, setFlights ] = useState([])
 
@@ -21,6 +21,7 @@ const Search = () => {
             setFlights(flightSearchResults);
             console.log(allFlights);
             console.log(flightSearchResults);
+            props.passedUpSearch(flightSearchResults)
         });
     };
 
