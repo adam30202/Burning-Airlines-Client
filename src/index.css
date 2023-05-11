@@ -55,7 +55,7 @@
   position: relative;
   display: inline-block;
   left: 39px;
-  top: 110px;
+  top: 70px;
   font-size: 22px;
 }
 
@@ -85,6 +85,36 @@
 .seat {
   display: inline-block;
   margin: 1em;
+  background-color: rgb(18, 235, 47);
+  padding: 0.8em;
+}
+
+button:active {
+  background-color: red
+}
+
+.seats-container {
+  position: relative;
+  left: 55px;
+  top: 30px;
+}
+
+.seats-left {
+  position: relative;
+  left: -30px;
+  top: 6px;
+}
+
+.reserve-button {
+  position: relative;
+  left: 340px;
+  bottom: 45px;
+}
+
+#reserve {
+  background-color: rgb(98, 195, 41);
+  border-radius: 0.5em;
+  height: 30px;
 }
 
 
