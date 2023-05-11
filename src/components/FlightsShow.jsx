@@ -1,16 +1,36 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const FlightsShow = (props) => {
-    const { flightNumber } = useParams({})
+const FlightsShow = () => {
+  const [flights, setFlights] = useState([]);
 
-    console.log(flightNumber)
-    console.log(props.results)
-    return (
-        <div className="flight-show-container">
-            { props.results[0].date } | Flight { props.results[0].id } | { props.results[0].from } > { props.results[0].to }
+  useEffect(() => {
+    // Fetch flights data from the database
+    fetchFlights();
+  }, []);
+
+  const fetchFlights = async () => {
+    try {
+      // Make an API request to fetch flights data
+      const response = await fetch("/api/flights");
+      const data = await response.json();
+
+      // Update the flights state with the fetched data
+      setFlights(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div className="flight-show-container">
+      {flights.map((flight) => (
+        <div key={flight.id}>
+          {flight.date} | Flight {flight.id} | {flight.from} > {flight.to}
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default FlightsShow;
