@@ -82,6 +82,11 @@
   
 }
 
+.seat {
+  display: inline-block;
+  margin: 1em;
+}
+
 
 /* 
 a {
