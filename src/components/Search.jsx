@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 
 const SERVER_URL = 'http://localhost:3000/flights'
 
+const SERVER_URL_PLANES = 'http://localhost:3000/airplanes'
+
 const Search = (props) => {
 
     const [ flights, setFlights ] = useState([])
+    // const [ planes, setPlanes ] = useState([])
 
     const fetchFlights = (search) => {
         axios(SERVER_URL).then((response) => {
@@ -19,12 +22,24 @@ const Search = (props) => {
                 };
             };
 
+        axios(SERVER_URL_PLANES).then((response) => {
+            let allPlanes = response.data
+            let planesSearchResults = [];
+            
+            for ( let i = 0; i < flightSearchResults.length; i ++ ) {
+                for ( let x = 0; x < allPlanes.length; x ++ ) {
+                        if (flightSearchResults[i].airplane_id === allPlanes[x].id) {
+                            planesSearchResults.push(allPlanes[x]);
+                    }
+                }
+            }
+            console.log(planesSearchResults);
+            props.passedUpSearch([flightSearchResults, planesSearchResults])
+        })
             setFlights(flightSearchResults);
-            console.log(allFlights);
             console.log(flightSearchResults);
-            props.passedUpSearch(flightSearchResults)
         });
-    };
+    }
 
     return (
         <div className="container">

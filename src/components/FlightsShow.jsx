@@ -8,7 +8,7 @@ const FlightsShow = (props) => {
     console.log(props.results)
     return (
         <div className="flight-show-container">
-            { props.results[0].date } | Flight { props.results[0].id } | { props.results[0].from } > { props.results[0].to }
+            { props.results[0][0].date } | Flight { props.results[0][0].id } | { props.results[0][0].from } > { props.results[0][0].to }
         </div>
     );
 };
