@@ -4,10 +4,9 @@ import axios from 'axios';
 const SERVER_URL = 'http://localhost:3000/airplanes'; //change to appropriate route later
 
 const Airplanes = () => {
+    
     const [airplanes, setAirplanes] = useState([]);
-    const [airplane, setAirplane] = useState('');
-    const [rows, setRows] = useState('');
-    const [columns, setColumns] = useState('');
+
 
     const fetchAirplanes = () => {
         axios(SERVER_URL).then((response) => {
@@ -17,12 +16,15 @@ const Airplanes = () => {
 
     useEffect(fetchAirplanes, []);
 
-    const saveAirplanes = (airplane, rows, columns) => {
-        console.log('Airplane:', airplane);
-        console.log('Rows:', rows);
-        console.log('Columns:', columns);
+    const saveAirplanes = (content) => {
+        console.log(content);
+        // console.log('Airplane:', airplane);
+        // console.log('Rows:', rows);
+        // console.log('Columns:', column);
 
-        axios.post(SERVER_URL, { airplane, rows, columns }).then((response) => {
+        axios.post(SERVER_URL, { flight_id: content.airplane, rows: content.rows, column: content.column
+        } ).then((response) => {
+          console.log(response);
             setAirplanes([...airplanes, response.data]); //Add new airplane to the state, triggers a re-render
         console.log(response.data);
         });
@@ -31,11 +33,7 @@ const Airplanes = () => {
         return (
             <div>
             <p>New plane</p>
-            <AirplaneForm onSubmit={(airplane, rows, columns) =>  saveAirplanes(airplane, rows, columns)}
-            setAirplane={setAirplane}
-            setRows={setRows}
-            setColumns={setColumns}
-             />
+            <AirplaneForm onSubmit={saveAirplanes} />
             <AirplanesList airplanes={ airplanes } />
         </div>
     );
@@ -43,28 +41,42 @@ const Airplanes = () => {
 
     
 
-const AirplaneForm = ({ onSubmit, setAirplane, setRows, setColumns }) => {
+const AirplaneForm = ({ onSubmit }) => {
+    const [content, setContent] = useState({
+      airplane: 0,
+      rows: '',
+      column: ''
+    });
     const handleSubmit = (e) => {
       e.preventDefault();
-      onSubmit(airplane, rows, columns);
-      setAirplane('');
-      setRows('');
-      setColumns('');
+      onSubmit(content);
     };
+
   
     const handleAirplaneChange = (e) => {
-      setAirplane(e.target.value);
+      setContent(prevState => ({
+        ...prevState,
+        airplane: Number(e.target.value)
+      }));
     };
+      
   
     const handleRowsChange = (e) => {
-      setRows(e.target.value);
+      setContent(prevState => ({
+        ...prevState,
+        rows: e.target.value
+      }));
+    
     };
   
-    const handleColumnsChange = (e) => {
-      setColumns(e.target.value);
+    const handleColumnChange = (e) => {
+      setContent(prevState => ({
+        ...prevState,
+        column: e.target.value
+      }));
     };
   
-    const [airplane, rows, columns] = [setAirplane, setRows, setColumns];
+    // const [airplane, rows, column] = [setAirplane, setRows, setColumn];
   
     return (
       <div>
@@ -79,7 +91,7 @@ const AirplaneForm = ({ onSubmit, setAirplane, setRows, setColumns }) => {
           </label>
           <label>
             Columns:
-            <input type="text" onChange={handleColumnsChange} required />
+            <input type="text" onChange={handleColumnChange} required />
           </label>
           <button type="submit">Add airplane</button>
         </form>
@@ -90,7 +102,7 @@ const AirplaneForm = ({ onSubmit, setAirplane, setRows, setColumns }) => {
 const AirplanesList = (props) => {
     return (
         <div>
-            { props.airplanes.map( (s) => <p key={ s.id }>{ s.content }</p> ) }
+          { props.airplanes.map( (airplane) => <p key={ airplane.id }>{ airplane.rows }</p> ) }
         </div>
     );
 };
