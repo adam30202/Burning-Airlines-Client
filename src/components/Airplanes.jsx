@@ -29,12 +29,18 @@ const Airplanes = () => {
         console.log(response.data);
         });
     };
+
+    const deleteAirplane = (id) => {
+      axios.delete(`${SERVER_URL}/${id}`).then(() => {
+          setAirplanes(airplanes.filter((airplane) => airplane.id !== id));
+      });
+    }
         
         return (
             <div>
             <p>New plane</p>
             <AirplaneForm onSubmit={saveAirplanes} />
-            <AirplanesList airplanes={ airplanes } />
+            <AirplanesList airplanes={ airplanes }  onDelete={deleteAirplane} />
         </div>
     );
 };
@@ -100,11 +106,22 @@ const AirplaneForm = ({ onSubmit }) => {
   };
 
 const AirplanesList = (props) => {
+    const handleDelete = (id) => {
+      props.onDelete(id);
+};
+
     return (
         <div>
-          { props.airplanes.map( (airplane) => <p key={ airplane.id }>{ airplane.rows }</p> ) }
+          { props.airplanes.map( (airplane) =>  (
+            <div key={ airplane.id }>
+              <p> Rows: { airplane.rows }</p>
+              <p> Columns: { airplane.column }</p>
+              <p> Airplane Number: { airplane.id }</p>
+              <button onClick={() => handleDelete(airplane.id)}>Delete</button> 
         </div>
-    );
+        ))};
+        </div>
+      );
 };
 
 export default Airplanes;
