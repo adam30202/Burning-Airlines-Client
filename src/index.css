@@ -26,7 +26,10 @@
 }
 
 .title {
-  color: red;
+    color: red;
+    font-size: 35px;
+    position: relative;
+    top: 31px;
 }
 
 .nav-tab {
@@ -46,6 +49,14 @@
   text-align: center;
   position: relative;
   bottom: 5px;
+}
+
+.flight-show-container {
+  position: relative;
+  display: inline-block;
+  left: 39px;
+  top: 110px;
+  font-size: 22px;
 }
 
 .grid-container {

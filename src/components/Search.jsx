@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const SERVER_URL = 'http://localhost:3000/flights'
 
@@ -27,8 +28,6 @@ const Search = (props) => {
 
     return (
         <div className="container">
-            Search
-            <h1 className="title">Virgin Airlines</h1>
              <SearchForm onSubmit={ fetchFlights }/>
              <SearchResults searchResults={ flights }/>
         </div>
@@ -85,7 +84,7 @@ const SearchResults = (props) => {
                             { result.date }
                         </div>
                         <div  className="grid-item">
-                            <a href={"/flights/" + result.id }>{ result.id }</a>
+                            <Link to={"/flights/" + result.id }>{ result.id } </Link>
                         </div>
                         <div className="grid-item">
                             { result.from } > { props.searchResults[0].to }

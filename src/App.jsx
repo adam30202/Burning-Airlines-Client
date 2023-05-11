@@ -11,12 +11,11 @@ import FlightsCreate from "./components/FlightsCreate";
 import FlightsShow from "./components/FlightsShow";
 import CurrentUser from "./components/CurrentUser";
 
+
 function App() {
 
-
-
 const [ currentUser, setCurrentUser ] = useState('Bob')
-const [ searchResult, setSearchResult ] = useState({})
+const [ searchResult, setSearchResult ] = useState([])
 
 const passedUpSearch = (result) => {
   setSearchResult(result)
@@ -29,7 +28,7 @@ const passedUpSearch = (result) => {
       <Routes>
         <Route path="/" element={<Search user={ currentUser } passedUpSearch={ passedUpSearch }/>} />                {/* User Use */}
         <Route path="/flights/:flightNumber" element={<FlightsShow user={ currentUser } results={ searchResult }/>} />  {/* User Use (Leads to FlightsCreate - need to fix) */}
-        <Route exact path="/flights" element={<FlightsCreate user={ currentUser }/>} />  {/* Admin Use */}
+        <Route exact path="/flights" element={ <FlightsCreate user={ currentUser }/>} />  {/* Admin Use */}
         <Route path="/airplanes" element={<Airplanes user={ currentUser }/>} />    {/* Admin Use */}
       </Routes>
     </BrowserRouter>
